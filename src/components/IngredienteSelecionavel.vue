@@ -10,7 +10,17 @@ export default {
         return {
             selecionado:false
         }
-    }
+    },
+    methods: {
+        aoClicar() {
+            this.selecionado = !this.selecionado
+
+            if (this.selecionado) {
+                this.$emit('adicionarIngrediente', this.ingrediente)
+            }
+        }
+    },
+    emits:['adicionarIngrediente']
 }
 
 </script>
@@ -18,8 +28,13 @@ export default {
 <template>
     <button
     class="ingrediente"
-    v-on:click="selecionado= !selecionado"
-    >
+    @click="aoClicar">
         <Tag :texto="ingrediente" :ativa="selecionado"/>
     </button>
 </template>
+
+<style scoped>
+.ingrediente{
+    cursor: pointer;
+}
+</style>
